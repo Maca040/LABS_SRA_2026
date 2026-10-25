@@ -1,4 +1,4 @@
-#LAB_SRA_2026
+# LAB_SRA_2026
 Repositorio correspondiente al laboratorio de la materia Síntesis de Redes Activas, ciclo lectivo 2026.
 
 ## Integrantes
