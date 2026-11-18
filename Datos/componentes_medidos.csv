@@ -1,0 +1,11 @@
+componente,descripcion,nominal,unidad,tolerancia_pct,medido
+R3a,resistencia 10k (parte de R3),10000,ohm,1,9943
+R3b,resistencia 1k (parte de R3),1000,ohm,1,998.8
+R3,serie R3a+R3b armada,11000,ohm,1,10942
+R1,celda Sallen-Key,12000,ohm,5,11760
+R2,celda Sallen-Key,12000,ohm,5,11740
+C1,poliester 472 (a masa),4.7e-9,F,5,4.72e-9
+C2,poliester 183 (realimentacion),18e-9,F,5,18.33e-9
+C3,poliester 103 (etapa 1),10e-9,F,5,10.09e-9
+Cd,ceramico desacople,100e-9,F,,83.3e-9
+Ce,electrolitico desacople,10e-6,F,,10e-6

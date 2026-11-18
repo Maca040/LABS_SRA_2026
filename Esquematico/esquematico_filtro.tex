@@ -1,0 +1,149 @@
+% Esquemático completo del filtro pasabajos Butterworth de 3.er orden
+% Compilar con pdflatex. Requiere circuitikz.
+\documentclass[border=10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage[american]{circuitikz}
+\usetikzlibrary{calc}
+
+\begin{document}
+\begin{circuitikz}[line width=0.8pt]
+\ctikzset{bipoles/length=1.35cm}
+
+% ------------------------------------------------------------------
+% ETAPA 1: primer orden R3-C3 + seguidor U1A
+% ------------------------------------------------------------------
+\draw (0,0.5) node[left] {$V_i(s)$} to[short, o-] (0.5,0.5)
+      to[R, l={$R_3 = 11\,\mathrm{k}\Omega$}] (3.0,0.5) coordinate (Vp1);
+\draw (Vp1) to[C, *-] ++(0,-2.0) node[ground] {};
+\node[anchor=east, align=right, font=\small] at ($(Vp1)+(-0.3,-1.0)$)
+      {$C_3$\\$10\,\mathrm{nF}$};
+
+\node[op amp, noinv input up, anchor=+] (A) at ($(Vp1)+(1.1,0)$) {};
+\draw (Vp1) -- (A.+);
+\node[above=2pt, font=\small] at ($(Vp1)+(0.55,0)$) {$V_{p1}$};
+
+% salida y realimentación del seguidor
+\draw (A.out) to[short, -*] ++(0.7,0) coordinate (Vo1);
+\draw (Vo1) -- ++(0,-1.5) -| ($(A.-)+(-0.55,0)$) -- (A.-);
+\node[above=2pt, font=\small] at (Vo1) {$V_{o1}$};
+
+% alimentación de U1A (nombre de red)
+\draw (A.up) -- ++(0,0.45) node[vcc] {$+15\,\mathrm{V}$};
+\draw (A.down) -- ++(0,-0.45) node[vee] {$-15\,\mathrm{V}$};
+
+% numeración de pines
+\node[font=\scriptsize, anchor=south west] at ($(A.+)+(0.02,0.02)$) {3};
+\node[font=\scriptsize, anchor=north west] at ($(A.-)+(0.02,-0.02)$) {2};
+\node[font=\scriptsize, anchor=south east] at ($(A.out)+(-0.05,0.02)$) {1};
+\node[font=\scriptsize, anchor=west] at ($(A.up)+(0.05,0.3)$) {8};
+\node[font=\scriptsize, anchor=west] at ($(A.down)+(0.05,-0.3)$) {4};
+\node[font=\small\bfseries] at ($(A)+(0.1,-0.05)$) {$U_{1A}$};
+
+% ------------------------------------------------------------------
+% ETAPA 2: Sallen-Key (R1, R2, C1, C2) + seguidor U1B
+% ------------------------------------------------------------------
+\draw (Vo1) to[short] ++(0.9,0) coordinate (S2in);
+\draw (S2in) to[R, l={$R_1 = 12\,\mathrm{k}\Omega$}, -*] ++(2.7,0) coordinate (Va);
+\draw (Va) to[R, l={$R_2 = 12\,\mathrm{k}\Omega$}, -*] ++(2.7,0) coordinate (Vb);
+\node[below right=2pt, font=\small] at (Va) {$V_a$};
+\node[below right=2pt, font=\small] at (Vb) {$V_b$};
+
+% C1 a masa
+\draw (Vb) to[C] ++(0,-2.0) node[ground] {};
+\node[anchor=east, align=right, font=\small] at ($(Vb)+(-0.3,-1.0)$)
+      {$C_1$\\$4{,}7\,\mathrm{nF}$};
+
+\node[op amp, noinv input up, anchor=+] (B) at ($(Vb)+(1.1,0.5)$) {};
+\draw (Vb) |- (B.+);
+
+% salida y realimentación del seguidor
+\draw (B.out) to[short, -*] ++(0.7,0) coordinate (Vo);
+\draw (Vo) -- ++(0,-1.5) -| ($(B.-)+(-0.55,0)$) -- (B.-);
+\draw (Vo) to[short, -o] ++(1.0,0) node[right] {$V_o(s)$};
+
+% C2: de V_a a la salida (realimentación positiva)
+\draw (Va) -- ++(0,2.3) coordinate (c2a)
+      to[C, l={$C_2 = 18\,\mathrm{nF}$}] (c2a -| Vo) -- (Vo);
+
+% alimentación de U1B
+\draw (B.up) -- ++(0,0.45) node[vcc] {$+15\,\mathrm{V}$};
+\draw (B.down) -- ++(0,-0.45) node[vee] {$-15\,\mathrm{V}$};
+
+% numeración de pines
+\node[font=\scriptsize, anchor=south west] at ($(B.+)+(0.02,0.02)$) {5};
+\node[font=\scriptsize, anchor=north west] at ($(B.-)+(0.02,-0.02)$) {6};
+\node[font=\scriptsize, anchor=south east] at ($(B.out)+(-0.05,0.02)$) {7};
+\node[font=\scriptsize, anchor=west] at ($(B.up)+(0.05,0.3)$) {8};
+\node[font=\scriptsize, anchor=west] at ($(B.down)+(0.05,-0.3)$) {4};
+\node[font=\small\bfseries] at ($(B)+(0.1,-0.05)$) {$U_{1B}$};
+
+% ------------------------------------------------------------------
+% Marcos de etapa
+% ------------------------------------------------------------------
+\coordinate (E1) at ($(Vo1)+(0.3,0)$);
+\coordinate (E2) at ($(Vo1)+(0.6,0)$);
+\coordinate (R)  at ($(Vo)+(2.5,0)$);
+
+\draw[dashed, gray, rounded corners=6pt]
+      (-1.3,-3.6) rectangle ($(E1)+(0,3.4)$);
+\node[gray, font=\small\bfseries, anchor=south west] at (-1.3,3.45)
+      {Etapa 1: primer orden ($R_3 C_3$ + seguidor)};
+\draw[dashed, gray, rounded corners=6pt]
+      ($(E2)+(0,-3.6)$) rectangle ($(R)+(0,3.4)$);
+\node[gray, font=\small\bfseries, anchor=south west] at ($(E2)+(0,3.45)$)
+      {Etapa 2: segundo orden Sallen-Key ($K = 1$)};
+
+% ------------------------------------------------------------------
+% ALIMENTACIÓN Y DESACOPLE
+% ------------------------------------------------------------------
+\draw[dashed, gray, rounded corners=6pt]
+      (-1.3,-11.8) rectangle ($(R)+(0,-4.6)$);
+\node[gray, font=\small\bfseries, anchor=south west] at (-1.3,-4.55)
+      {Alimentación simétrica del laboratorio y capacitores de desacople
+       (colocarlos junto a los pines 8 y 4 del TL082)};
+
+% riel +15 V
+\draw (0.2,-6.2) to[short, o-] (7.4,-6.2);
+\node[anchor=south, font=\small] at (0.2,-6.15) {$+15\,\mathrm{V}$};
+
+% bus de masa
+\draw (0.2,-8.5) to[short, o-] (7.4,-8.5);
+\node[anchor=south, font=\small] at (0.2,-8.45) {GND};
+\draw (1.4,-8.5) node[ground] {};
+
+% riel -15 V
+\draw (0.2,-10.8) to[short, o-] (7.4,-10.8);
+\node[anchor=south, font=\small] at (0.2,-10.75) {$-15\,\mathrm{V}$};
+
+% desacople del riel +15 V (electrolítico: + hacia +15 V)
+\draw (3.4,-6.2) to[C, *-*] (3.4,-8.5);
+\node[anchor=east, align=right, font=\small] at (3.1,-7.35)
+      {$C_{d1}$\\$100\,\mathrm{nF}$};
+\draw (6.2,-6.2) to[eC, *-*] (6.2,-8.5);
+\node[anchor=east, align=right, font=\small] at (5.9,-7.35)
+      {$C_{e1}$\\$10\,\mu\mathrm{F}$};
+
+% desacople del riel -15 V (electrolítico: + hacia masa)
+\draw (3.4,-8.5) to[C, *-*] (3.4,-10.8);
+\node[anchor=east, align=right, font=\small] at (3.1,-9.65)
+      {$C_{d2}$\\$100\,\mathrm{nF}$};
+\draw (6.2,-8.5) to[eC, *-*] (6.2,-10.8);
+\node[anchor=east, align=right, font=\small] at (5.9,-9.65)
+      {$C_{e2}$\\$10\,\mu\mathrm{F}$};
+
+% leyenda
+\node[draw, rounded corners=3pt, align=left, font=\small, inner sep=6pt,
+      anchor=north west] at (9.2,-5.5) {%
+  \textbf{U$_1$: TL082CP (DIP-8)}\\[2pt]
+  U$_{1A}$: pin 3 ($+$), pin 2 ($-$), pin 1 (salida)\\
+  U$_{1B}$: pin 5 ($+$), pin 6 ($-$), pin 7 (salida)\\
+  $V^{+}$: pin 8 \hspace{1em} $V^{-}$: pin 4\\[4pt]
+  Los terminales $+15\,\mathrm{V}$ y $-15\,\mathrm{V}$ de los operacionales\\
+  y del bloque de alimentación corresponden a la misma red.\\
+  Todas las masas están unidas al GND de la fuente.\\[4pt]
+  $C_{1,2,3}$: película (poliéster). $C_{d}$: cerámicos de 100\,nF.\\
+  $C_{e}$: electrolíticos de 10\,$\mu$F, 25\,V (se indica la polaridad).};
+\end{circuitikz}
+\end{document}
