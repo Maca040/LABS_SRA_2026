@@ -26,6 +26,7 @@ El laboratorio comprende el desarrollo teórico, el diseño, las simulaciones de
 | `Scripts/8_Mediciones_Laboratorio.ipynb` | Procesamiento de las mediciones y contraste con el modelo evaluado con los componentes medidos. Genera `Figuras/lab_bode_medido.png` y `Figuras/lab_etapas_medido.png`. |
 | `Datos/` | Mediciones del laboratorio en CSV: componentes, barrido total, cada etapa, linealidad, escalón y verificaciones en continua. |
 | `Fotos_laboratorio/` | Fotos del montaje y capturas del osciloscopio usadas en el informe. |
+| `Simulacion_LTspice` | Simulación en LTspice de filtro pasa bajo |
 | `InformeFiltro.pdf` | Informe final. |
 
 ## Uso de los scripts
