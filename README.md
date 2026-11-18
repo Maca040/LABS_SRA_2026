@@ -21,7 +21,7 @@ El laboratorio comprende el desarrollo teórico, el diseño, las simulaciones de
 | `Scripts/1_analisis_4casos.ipynb` | Diseño matemático de los cuatro casos (SciPy). |
 | `Scripts/2_BodeAnalisis.ipynb` | Comparación de aproximaciones: magnitud, fase y retardo de grupo. |
 | `Scripts/4_Analisis_Circuital_Simbolico_Actualizado.ipynb` | Análisis nodal simbólico y comparación $H_c(s)$ vs $H_t(s)$ (SymPy). |
-| `Scripts/5_Componentes_y_Tolerancias.ipynb` | Ventana de $W_n$, valores comerciales, tolerancias (peor caso y Monte Carlo), verificación del TL082 y valores esperados para el laboratorio. Genera `Figuras/respuesta_vs_plantilla.png`. |
+| `Scripts/5_Componentes_y_Tolerancias.ipynb` | Ventana de $W_n$, valores comerciales, tolerancias (peor caso y Monte Carlo), verificación del TL082 y valores esperados para el laboratorio. |
 | `Scripts/6_Sensitividad.ipynb` | Sensibilidades $S_x^{\omega_0}$ y $S_x^Q$ y validación con perturbaciones de ±1 %. |
 | `Scripts/8_Mediciones_Laboratorio.ipynb` | Procesamiento de las mediciones y contraste con el modelo evaluado con los componentes medidos. |
 | `Datos/` | Mediciones del laboratorio en CSV: componentes, barrido total, cada etapa, linealidad, escalón y verificaciones en continua. |
