@@ -28,17 +28,9 @@ El laboratorio comprende el desarrollo teórico, el diseño, las simulaciones de
 | `Fotos_laboratorio/` | Fotos del montaje y capturas del osciloscopio usadas en el informe. |
 | `InformeFiltro.pdf` | Informe final. |
 
-## Cómo reproducir los resultados
+## Uso de los scripts
 
-Requisitos: Python 3 con `numpy`, `scipy`, `pandas`, `matplotlib` y Jupyter.
-
-```bash
-pip install numpy scipy pandas matplotlib jupyter
-cd Scripts
-jupyter notebook
-```
-
-Los notebooks 5 y 8 leen los datos de `../Datos` y guardan las figuras en `../Figuras`, así que deben ejecutarse desde la carpeta `Scripts`. Los porcentajes de cumplimiento del Monte Carlo pueden variar unas décimas según la semilla aleatoria.
+Los notebooks (`.ipynb`) de este repositorio ya incluyen la instalación de todas las librerías necesarias en su interior. Están diseñados para ejecutarse directamente en **Google Colab**, lo que te permite correr el código en la nube sin tener que descargar ni configurar dependencias de forma local en tu computadora.
 
 ## Filtro implementado
 
