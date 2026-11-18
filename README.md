@@ -25,8 +25,6 @@ El laboratorio comprende el desarrollo teórico, el diseño, las simulaciones de
 | `Scripts/6_Sensitividad.ipynb` | Sensibilidades $S_x^{\omega_0}$ y $S_x^Q$ y validación con perturbaciones de ±1 %. |
 | `Scripts/8_Mediciones_Laboratorio.ipynb` | Procesamiento de las mediciones y contraste con el modelo evaluado con los componentes medidos. Genera `Figuras/lab_bode_medido.png` y `Figuras/lab_etapas_medido.png`. |
 | `Datos/` | Mediciones del laboratorio en CSV: componentes, barrido total, cada etapa, linealidad, escalón y verificaciones en continua. |
-| `Esquematico/` | Esquemático completo del filtro (circuitikz, compilar con pdfLaTeX) y su imagen. |
-| `Figuras/` | Figuras generadas por los notebooks. |
 | `Fotos_laboratorio/` | Fotos del montaje y capturas del osciloscopio usadas en el informe. |
 | `InformeFiltro.pdf` | Informe final. |
 
