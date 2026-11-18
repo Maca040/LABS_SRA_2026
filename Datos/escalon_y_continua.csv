@@ -1,0 +1,12 @@
+magnitud,valor,unidad,nota
+tiempo_crecimiento_10_90,260,us,cursores X1=140 us X2=400 us
+instante_pico_desde_10pct,440,us,
+sobrepico,6.5,%,estimado sobre la captura (traza a 1 V/div)
+Vo_min_escalon,-1.92,V,
+Vo_max_escalon,2.28,V,
+V_pin8,15.06,V,
+V_pin4,-15.04,V,
+offset_Vo1,0.02,mV,entrada a masa
+offset_Vo,0.5,mV,entrada a masa (captura del multimetro: 0.4 mV)
+ruido_Vo,19.6,mVpp,entrada a masa; puntas x1
+temperatura,28,C,
