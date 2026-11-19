@@ -2,9 +2,16 @@
 
 Laboratorio de filtros de **Síntesis de Redes Activas** (FCEFyN, UNC), ciclo lectivo 2026.
 
-**Integrantes:** Blanco, Luciano · González, Macarena · Narváez, Jenifer · Román, Bianca
-**Docentes:** Pablo Ferreyra · César Reale
+## Integrantes
+* Blanco, Luciano
+* González, Macarena
+* Narváez, Jenifer
+* Román, Bianca
 
+## Docentes
+* Prof. Pablo Ferreyra
+* Prof. César Reale
+  
 ## Filtro implementado
 
 Pasabajos Butterworth de orden 3, $W_n = 8900$ rad/s, con TL082 a ±15 V.
