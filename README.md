@@ -1,46 +1,76 @@
 # LAB_SRA_2026
-Repositorio correspondiente al laboratorio de filtros de la materia Síntesis de Redes Activas, ciclo lectivo 2026.
 
-## Integrantes
-* Blanco, Luciano
-* González, Macarena
-* Narváez, Jenifer
-* Román, Bianca
+Laboratorio de filtros de **Síntesis de Redes Activas** (FCEFyN, UNC), ciclo lectivo 2026.
 
-## Docentes
-* Prof. Pablo Ferreyra
-* Prof. César Reale
-
-## Contenido
-El laboratorio comprende el desarrollo teórico, el diseño, las simulaciones de los circuitos y los scripts de procesamiento en Python.
-
-## Estructura
-
-| Carpeta / archivo | Contenido |
-|---|---|
-| `Scripts/1_analisis_4casos.ipynb` | Diseño matemático de los cuatro casos (SciPy). |
-| `Scripts/2_BodeAnalisis.ipynb` | Comparación de aproximaciones: magnitud, fase y retardo de grupo. |
-| `Scripts/4_Analisis_Circuital_Simbolico_Actualizado.ipynb` | Análisis nodal simbólico y comparación $H_c(s)$ vs $H_t(s)$ (SymPy). |
-| `Scripts/5_Componentes_y_Tolerancias.ipynb` | Ventana de $W_n$, valores comerciales, tolerancias (peor caso y Monte Carlo), verificación del TL082 y valores esperados para el laboratorio. |
-| `Scripts/6_Sensitividad.ipynb` | Sensibilidades $S_x^{\omega_0}$ y $S_x^Q$ y validación con perturbaciones de ±1 %. |
-| `Scripts/8_Mediciones_Laboratorio.ipynb` | Procesamiento de las mediciones y contraste con el modelo evaluado con los componentes medidos. |
-| `Datos/` | Mediciones del laboratorio en CSV: componentes, barrido total, cada etapa, linealidad, escalón y verificaciones en continua. |
-| `Fotos_laboratorio/` | Fotos del montaje y capturas del osciloscopio usadas en el informe. |
-| `Simulacion_LTspice` | Simulación en LTspice de filtro pasa bajo |
-| `InformeFiltro.pdf` | Informe final. |
-
-## Uso de los scripts
-
-Los notebooks (`.ipynb`) de este repositorio ya incluyen la instalación de todas las librerías necesarias en su interior. Están diseñados para ejecutarse directamente en **Google Colab**, lo que te permite correr el código en la nube sin tener que descargar ni configurar dependencias de forma local en tu computadora.
+**Integrantes:** Blanco, Luciano · González, Macarena · Narváez, Jenifer · Román, Bianca
+**Docentes:** Pablo Ferreyra · César Reale
 
 ## Filtro implementado
 
-Pasabajos Butterworth de orden 3, $W_n = 8900$ rad/s ($f_p = 1$ kHz con $A_p \le 1$ dB; $f_s = 4$ kHz con $A_s \ge 24$ dB). Cascada de una sección de primer orden ($R_3 C_3$ + seguidor) y una celda Sallen-Key con ganancia unitaria, con un TL082 alimentado a ±15 V.
+Pasabajos Butterworth de orden 3, $W_n = 8900$ rad/s, con TL082 a ±15 V.
+Plantilla: $A_p \le 1$ dB en 1 kHz y $A_s \ge 24$ dB en 4 kHz.
+Cascada de una sección $R_3C_3$ + seguidor y una celda Sallen-Key de ganancia unitaria.
 
 | Componente | Valor |
 |---|---|
-| $R_3$ | 11 kΩ (10 kΩ + 1 kΩ en serie, 1 %) |
+| $R_3$ | 11 kΩ (10 kΩ + 1 kΩ, 1 %) |
 | $R_1 = R_2$ | 12 kΩ (5 %) |
 | $C_1$, $C_2$, $C_3$ | 4,7 nF, 18 nF, 10 nF (poliéster, 5 %) |
 
-Resultados medidos: atenuación de 0,44 dB en 1 kHz, al menos 24,6 dB en 4 kHz y frecuencia de −3 dB de 1433 Hz (9004 rad/s).
+**Medido:** 0,44 dB en 1 kHz, ≥ 24,6 dB en 4 kHz, $f_{-3\,\mathrm{dB}}$ = 1433 Hz (9004 rad/s).
+
+## Estructura
+
+```
+LABS_SRA_2026/
+├── NIVEL I/
+│   ├── Esquematico/
+│   ├── Fotos_laboratorio/
+│   ├── Mediciones_Lab/
+│   ├── Scripts/
+│   ├── Simulacion_LTspice/
+│   └── InformeFiltro_NIVEL1.pdf
+├── NIVEL II/
+│   ├── Script/
+│   ├── SimulacionesLTspice/
+│   ├── TablasObtenidas/
+│   └── Nivel2TP_Filtro.pdf
+└── README.md
+```
+
+### Nivel I: diseño, simulación y construcción
+
+| Carpeta / archivo | Contenido |
+|---|---|
+| `Esquematico/` | Esquema del circuito. |
+| `Scripts/` | Notebooks de diseño y análisis (tabla de abajo). |
+| `Simulacion_LTspice/` | Simulación del pasabajos en LTspice. |
+| `Fotos_laboratorio/` | Montaje y capturas del osciloscopio. |
+| `Mediciones_Lab/` | Mediciones en CSV: componentes, barrido total, cada etapa, linealidad, escalón y continua. |
+| `InformeFiltro_NIVEL1.pdf` | Informe del Nivel I. |
+
+Notebooks de `Scripts/`, en orden de uso:
+
+| Notebook | Contenido |
+|---|---|
+| `1_analisis_4casos` | Diseño matemático de los cuatro casos (SciPy). |
+| `2_BodeAnalisis` | Magnitud, fase y retardo de grupo de las aproximaciones. |
+| `4_Analisis_Circuital_Simbolico_Actualizado` | Análisis nodal simbólico, $H_c(s)$ vs $H_t(s)$ (SymPy). |
+| `5_Componentes_y_Tolerancias` | Ventana de $W_n$, valores comerciales, tolerancias y verificación del TL082. |
+| `6_Sensitividad` | Sensibilidades $S_x^{\omega_0}$ y $S_x^Q$, validación con ±1 %. |
+| `8_Mediciones_Laboratorio` | Procesamiento de mediciones y contraste con el modelo. |
+
+### Nivel II: análisis estadístico de tolerancias
+
+Monte Carlo de 500 corridas en LTspice con cuatro combinaciones de tolerancias, comparado con la sensibilidad lineal.
+
+| Carpeta / archivo | Contenido |
+|---|---|
+| `SimulacionesLTspice/` | Netlist `Filtro_MC.cir` y `.log` de las corridas. |
+| `Script/` | Notebook y script de procesamiento de los `.log`. |
+| `TablasObtenidas/` | Tablas y figuras de resultados. |
+| `Nivel2TP_Filtro.pdf` | Informe del Nivel II. |
+
+## Uso
+
+Los notebooks instalan sus dependencias y están pensados para correr en **Google Colab**, sin configuración local.
